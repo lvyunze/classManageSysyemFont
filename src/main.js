@@ -6,7 +6,6 @@ import axios from "axios";
 import VueAxios from 'vue-axios';
 import router from "./router";
 import BootstrapVue from 'bootstrap-vue';
-import store from '../store/index';
 import {
   Button,
   Select,
@@ -60,7 +59,6 @@ new Vue({
   el: "#app",
   router,
   components: { App },
-  store,
   template: "<App/>",
 });
 // 在请求头中加token
