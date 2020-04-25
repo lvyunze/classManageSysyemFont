@@ -13,13 +13,14 @@
       <el-menu-item index="2">校园热门信息</el-menu-item>
       <el-menu-item index="3">个人设置</el-menu-item>
       <el-menu-item index="4"></el-menu-item>
-      <el-menu-item index="5">登录</el-menu-item>
+      <el-menu-item index="5"  v-if="!isAuth"><v-Login>登录</v-Login></el-menu-item>
       <el-menu-item index="6">注册</el-menu-item>
     </el-menu>
   </div>
 </template>
 <script>
 import Login from "../components/home/Login";
+import { mapGetters } from 'vuex'
 export default {
   components: {
     "v-Login": Login
@@ -29,10 +30,18 @@ export default {
       //   activeIndex2: "1"
     };
   },
+  computed: {
+			...mapGetters('auth', {
+				isAuth: 'isAuthenticated',
+			})
+		},
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
-    }
+    },
+    onLogout() {
+				this.$store.dispatch('auth/logout');
+			}
   }
 };
 </script>

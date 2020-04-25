@@ -1,22 +1,18 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import axios from "axios";
-
+import Router from 'vue-router'
+import axiosAuth from '@/api/axios-auth'
 
 Vue.use(VueRouter);
 const routes = [
   {
-    path: "/",
+    path: "/login1",
     name: "login1",
     component: () => import("@/views/login1"),
   },
   {
-    path: '/class_fee',
-    name: 'class_fee',
-    component: () => import("@/views/users/class_fee")
-  },
-  {
-    path: "/index",
+    path: "/",
     name: "index",
     component: () => import("@/views/index"),
   },
@@ -25,19 +21,38 @@ const routes = [
 const router = new VueRouter({
   routes,
 });
-// 导航守卫
-// 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login1') {
-    next();
-  } else {
-    let token = localStorage.getItem('Authorization');
- 
-    if (token === 'null' || token === '') {
-      next('/login1');
-    } else {
-      next();
-    }
-  }
+	let token = localStorage.getItem('token');
+	let requireAuth = to.matched.some(record => record.meta.requiresAuth);
+
+	if (!requireAuth) {
+		next();
+	}
+
+	if (requireAuth && !token) {
+		next('/login');
+	}
+
+	if (to.path === '/login') {
+		if (token) {
+			axiosAuth.post('/verify-token').then(() => {
+				next('/dashboard');
+			}).catch(() => {
+				next();
+			});
+		}
+		else {
+			next();
+		}
+	}
+
+	if (requireAuth && token) {
+		axiosAuth.post('/verify-token').then(() => {
+			next();
+		}).catch(() => {
+			next('/login');
+		})
+	}
 });
+
 export default router;

@@ -6,6 +6,8 @@ import axios from "axios";
 import VueAxios from 'vue-axios';
 import router from "./router";
 import BootstrapVue from 'bootstrap-vue';
+import store from './store/index'
+
 import {
   Button,
   Select,
@@ -29,7 +31,7 @@ import {
   Switch,
 } from "element-ui";
 Vue.config.productionTip = false;
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'http://localhost:5000/api/v1';
 
 Vue.use(BootstrapVue);
 
@@ -58,20 +60,9 @@ Vue.use(VueAxios,axios)
 new Vue({
   el: "#app",
   router,
+  store,
   components: { App },
   template: "<App/>",
 });
-// 在请求头中加token
-axios.interceptors.request.use(
-  config => {
-  // 判断是否存在token，如果存在的话，则每个http header都加上token
-    let token = sessionStorage.getItem('Authorization')
-    if (!config.headers.hasOwnProperty('Authorization') && token) {
-      config.headers.Authorization = token;
-    }
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  });
+
 
