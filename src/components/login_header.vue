@@ -14,6 +14,7 @@
       <el-menu-item index="4"></el-menu-item>
       <el-menu-item index="5"  v-if="!isAuth"><v-Login>登录</v-Login></el-menu-item>
       <el-menu-item index="6">注册</el-menu-item>
+      <el-menu-item index="7"  @click="onLogout" >注销</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -26,6 +27,7 @@ export default {
   },
   data() {
     return {
+      //   activeIndex2: "1"
     };
   },
   computed: {

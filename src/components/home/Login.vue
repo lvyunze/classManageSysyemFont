@@ -31,6 +31,7 @@
   </div>
 </template>
 <script>
+import Message from 'element-ui'
 import axios from 'axios'
 import Qs from "qs"
 export default {
@@ -43,7 +44,7 @@ export default {
         setTimeout(() => {
             var myreg=/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
             if (!myreg.test(value) ) {
-              callback(new Error('请输入正确的手机号码'));
+              callback(new Error('请输入正确的账号'));
             } else {
               callback();
             }
@@ -97,11 +98,16 @@ export default {
          this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$store.dispatch('auth/login', this.ruleForm2).then(() => {
-          this.$router.push({ path: this.redirect || '/login1' }, onComplete => { }, onAbort => { })
-          /*假设login1为登陆后的界面 */
+              
+  
 
-				});        
-          } 
+        });   
+        console.log(this.$route.path)
+              this.$message({
+            type: 'success',
+            message: '登录失败，检查账户或密码' 
+          });     
+          }
         }); 
       },
     resetForm(formName) {

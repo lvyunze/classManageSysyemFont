@@ -5,54 +5,59 @@ import Router from 'vue-router'
 import axiosAuth from '@/api/axios-auth'
 
 Vue.use(VueRouter);
-const routes = [
-  {
-    path: "/login1",
-    name: "login1",
-    component: () => import("@/views/login1"),
-  },
-  {
-    path: "/",
-    name: "index",
-    component: () => import("@/views/index"),
-  },
-  
+const routes = [{
+        path: "/homepage",
+        name: "homepage",
+        component: () =>
+            import ("@/views/homepage"),
+    },
+    {
+        path: "/",
+        name: "index",
+        component: () =>
+            import ("@/views/index"),
+    },
+
 ];
 const router = new VueRouter({
-  routes,
+    routes,
 });
 router.beforeEach((to, from, next) => {
-	let token = localStorage.getItem('token');
-	let requireAuth = to.matched.some(record => record.meta.requiresAuth);
+    let token = localStorage.getItem('token');
+    let requireAuth = to.matched.some(record => record.meta.requiresAuth);
 
-	if (!requireAuth) {
-		next();
-	}
+    if (!requireAuth) {
+        next();
+    }
 
-	if (requireAuth && !token) {
-		next('/login');
-	}
+    if (requireAuth && !token) {
+        this.$message({
+            type: 'success',
+            message: '登录失败，检查账户或密码'
+        });
+        next('/');
+    }
 
-	if (to.path === '/login') {
-		if (token) {
-			axiosAuth.post('/verify-token').then(() => {
-				next('/dashboard');
-			}).catch(() => {
-				next();
-			});
-		}
-		else {
-			next();
-		}
-	}
+    if (to.path === '/') {
+        if (token) {
+            axiosAuth.post('/verify-token').then(() => {
+                next('/homepage');
+            }).catch(() => {
+                next();
+            });
+        } else {
+            next();
+        }
+    }
 
-	if (requireAuth && token) {
-		axiosAuth.post('/verify-token').then(() => {
-			next();
-		}).catch(() => {
-			next('/login');
-		})
-	}
+    if (requireAuth && token) {
+        axiosAuth.post('/verify-token').then(() => {
+            next();
+        }).catch(() => {
+            next('/');
+        })
+    }
+
 });
 
 export default router;
