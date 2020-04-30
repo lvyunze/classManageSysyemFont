@@ -59,45 +59,6 @@ Vue.use(Switch);
 Vue.use(VueAxios, axios)
 Vue.prototype.$message = Message;
 
-var flag; // 首先定义一个开关
-
-router.beforeEach((to, from, next) => {
-
-    if (to.path == '/homepage' || to.path == '/') { // 当进入这个页面进行记录
-
-        flag = true; // 改变信号
-
-        next();
-
-    } else {
-
-        if (flag) { // 如果路由发生变化判断信号
-
-            Vue.prototype.$confirm('您确定要退出此页面?', '提示', {
-
-                confirmButtonText: '确定',
-
-                cancelButtonText: '取消',
-
-                type: 'warning'
-
-            }).then(() => {
-
-                next()
-
-                flag = false;
-
-            })
-
-        } else {
-
-            next()
-
-        }
-
-    }
-
-});
 
 /* eslint-disable no-new */
 new Vue({

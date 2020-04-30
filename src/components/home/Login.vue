@@ -98,15 +98,7 @@ export default {
          this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$store.dispatch('auth/login', this.ruleForm2).then(() => {
-              
-  
-
-        });   
-        console.log(this.$route.path)
-              this.$message({
-            type: 'success',
-            message: '登录失败，检查账户或密码' 
-          });     
+        });       
           }
         }); 
       },

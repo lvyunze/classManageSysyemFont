@@ -31,10 +31,6 @@ router.beforeEach((to, from, next) => {
     }
 
     if (requireAuth && !token) {
-        this.$message({
-            type: 'success',
-            message: '登录失败，检查账户或密码'
-        });
         next('/');
     }
 
