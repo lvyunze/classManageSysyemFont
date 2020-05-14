@@ -13,17 +13,19 @@
       <el-menu-item index="3">个人设置</el-menu-item>
       <el-menu-item index="4"></el-menu-item>
       <el-menu-item index="5"  v-if="!isAuth"><v-Login>登录</v-Login></el-menu-item>
-      <el-menu-item index="6">注册</el-menu-item>
-      <el-menu-item index="7"  @click="onLogout" >注销</el-menu-item>
+      <el-menu-item index="6" v-if="isAuth"><v-logon>注册</v-logon></el-menu-item>
+      <el-menu-item index="7"  @click="onLogout" v-if="isAuth">注销</el-menu-item>
     </el-menu>
   </div>
 </template>
 <script>
 import Login from "../components/home/Login";
+import logon from "../components/home/logon";
 import { mapGetters } from 'vuex'
 export default {
   components: {
-    "v-Login": Login
+    "v-Login": Login,
+    "v-logon": logon
   },
   data() {
     return {

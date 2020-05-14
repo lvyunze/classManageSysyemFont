@@ -8,6 +8,7 @@ import router from "./router";
 import BootstrapVue from 'bootstrap-vue';
 import store from './store/index'
 
+
 import {
     Message,
     Button,
@@ -67,4 +68,4 @@ new Vue({
     store,
     components: { App },
     template: "<App/>",
-});
+})

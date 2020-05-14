@@ -1,8 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import axios from "axios";
-import Router from 'vue-router'
-import axiosAuth from '@/api/axios-auth'
+import axiosAuth from '@/api/axios-auth';
+import instance from '@/api/axios-auth';
+Vue.prototype.instance = instance
+
 
 Vue.use(VueRouter);
 const routes = [{
@@ -16,6 +17,12 @@ const routes = [{
         name: "index",
         component: () =>
             import ("@/views/index"),
+    },
+    {
+        path: "/class_fee",
+        name: "class_fee",
+        component: () =>
+            import ("@/views/users/class_fee"),
     },
 
 ];
@@ -33,10 +40,9 @@ router.beforeEach((to, from, next) => {
     if (requireAuth && !token) {
         next('/');
     }
-
     if (to.path === '/') {
         if (token) {
-            axiosAuth.post('/verify-token').then(() => {
+            axiosAuth.post('/verify_token').then(() => {
                 next('/homepage');
             }).catch(() => {
                 next();
