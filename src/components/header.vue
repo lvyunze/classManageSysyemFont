@@ -13,7 +13,7 @@
       <el-menu-item index="3">个人设置</el-menu-item>
       <el-menu-item index="4"></el-menu-item>
       <el-menu-item index="5"  v-if="!isAuth"><v-Login>登录</v-Login></el-menu-item>
-      <el-menu-item index="6" v-if="isAuth"><v-logon>注册</v-logon></el-menu-item>
+      <el-menu-item index="6" ><v-logon>注册</v-logon></el-menu-item>
     </el-menu>
   </div>
 </template>

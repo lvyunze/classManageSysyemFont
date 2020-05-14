@@ -1,8 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import axiosAuth from '@/api/axios-auth';
-import instance from '@/api/axios-auth';
-Vue.prototype.instance = instance
+
 
 
 Vue.use(VueRouter);
@@ -26,9 +25,11 @@ const routes = [{
     },
 
 ];
+
 const router = new VueRouter({
     routes,
 });
+
 router.beforeEach((to, from, next) => {
     let token = localStorage.getItem('token');
     let requireAuth = to.matched.some(record => record.meta.requiresAuth);

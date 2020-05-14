@@ -1,6 +1,6 @@
 <template>
   <el-table
-    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    :data="tableData.filter(data => !search || data.money_user.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%"
      max-height="400">
     <el-table-column
@@ -9,15 +9,15 @@
     </el-table-column>
     <el-table-column
       label="名字"
-      prop="name">
+      prop="money_user">
     </el-table-column>
     <el-table-column
       label="收/支情况"
-      prop="inout">
+      prop="in_out">
     </el-table-column>
     <el-table-column
       label="钱数"
-      prop="money">
+      prop="left_money">
     </el-table-column>
     <el-table-column
       label="用途"
@@ -36,36 +36,32 @@
 </template>
 
 <script>
+import {getclassfee} from "../../api"
   export default {
     data() {
       return {
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '111',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }],
+        tableData: [
+
+        ],
         search: ''
       }
     },
-    methods: {
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-      handleDelete(index, row) {
-        console.log(index, row);
-      }
+       
+    created(){
+      this.convert();
     },
+    methods: {
+        convert: async function () {
+        let getclassfee =  await this.$api.getclassfee()
+        console.log(getclassfee)
+        this.tableData = getclassfee.data
+        console.log(getclassfee.data)
+      
+      }
+       
+      
+         
+    },
+
   }
 </script>

@@ -7,6 +7,8 @@ import VueAxios from 'vue-axios';
 import router from "./router";
 import BootstrapVue from 'bootstrap-vue';
 import store from './store/index'
+import api from './api'
+
 
 
 import {
@@ -33,7 +35,9 @@ import {
     Switch,
 
 } from "element-ui";
+Vue.prototype.$api = api
 Vue.config.productionTip = false;
+
 axios.defaults.baseURL = 'http://localhost:5000/api/v1';
 
 Vue.use(BootstrapVue);
@@ -61,11 +65,13 @@ Vue.use(VueAxios, axios)
 Vue.prototype.$message = Message;
 
 
+
 /* eslint-disable no-new */
 new Vue({
     el: "#app",
     router,
     store,
+    axios,
     components: { App },
     template: "<App/>",
 })
