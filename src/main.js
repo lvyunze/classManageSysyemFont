@@ -8,10 +8,12 @@ import router from "./router";
 import BootstrapVue from 'bootstrap-vue';
 import store from './store/index'
 import api from './api'
-
+import VuePreview from 'vue-preview'
+import preview from 'vue-preview'
 
 
 import {
+    Container,
     Message,
     Button,
     Select,
@@ -33,12 +35,16 @@ import {
     Input,
     Dialog,
     Switch,
+    header,
+    aside,
+    main,
+    Image,
 
 } from "element-ui";
 Vue.prototype.$api = api
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL = 'http://localhost:5000/api/v1';
+axios.defaults.baseURL = 'http://106.14.117.35:5001/api/v1';
 
 Vue.use(BootstrapVue);
 Vue.use(Button);
@@ -61,9 +67,25 @@ Vue.use(FormItem);
 Vue.use(Input);
 Vue.use(Dialog);
 Vue.use(Switch);
-Vue.use(VueAxios, axios)
+Vue.use(Container)
+Vue.use(header),
+    Vue.use(VuePreview),
+    Vue.use(Image),
+    Vue.use(aside),
+    Vue.use(main),
+    Vue.use(VueAxios, axios)
 Vue.prototype.$message = Message;
-
+// with parameters install
+Vue.use(preview, {
+    mainClass: 'pswp--minimal--dark',
+    barsSize: { top: 0, bottom: 0 },
+    captionEl: false,
+    fullscreenEl: false,
+    shareEl: false,
+    bgOpacity: 0.85,
+    tapToClose: true,
+    tapToToggleControls: false
+})
 
 
 /* eslint-disable no-new */

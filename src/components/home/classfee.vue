@@ -55,7 +55,6 @@ import {getclassfee} from "../../api"
         let getclassfee =  await this.$api.getclassfee()
         console.log(getclassfee)
         this.tableData = getclassfee.data
-        console.log(getclassfee.data)
       
       }
        

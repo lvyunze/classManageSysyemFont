@@ -33,13 +33,13 @@
 </template>
 
 <script>
-  import Uploader from './Uploader'
-  import FileUrl from '../models/file-url'
+  import Uploader from '../Uploader'
+  import FileUrl from '../../store/modules/file-url'
   export default {
     name: "PictureUpload",
     data() {
       return {
-        server_config: this.global.server_config,
+        server_config: "",
         files:[],
         up: {},
         images: [],

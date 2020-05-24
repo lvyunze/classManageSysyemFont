@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import axiosAuth from '@/api/axios-auth';
-
+import PictureUpload from '../components/PictureUpload'
 
 
 Vue.use(VueRouter);
@@ -22,6 +22,23 @@ const routes = [{
         name: "class_fee",
         component: () =>
             import ("@/views/users/class_fee"),
+    },
+    {
+        path: '/photo',
+        component: () =>
+            import ("@/views/users/photo"),
+        name: 'photo'
+    },
+    {
+        path: '/showphoto',
+        component: () =>
+            import ("@/views/users/showphoto"),
+        name: 'showphoto'
+    },
+    {
+        path: '/pictureUpload',
+        component: PictureUpload,
+        name: 'pictureUpload'
     },
 
 ];
