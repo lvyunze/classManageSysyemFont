@@ -38,6 +38,7 @@ const actions = {
                 console.log(localStorage.getItem('token'))
                 router.replace('/homepage');
             } else {
+                router.replace('/');
                 console.log('Login error');
             }
         }).catch(error => {

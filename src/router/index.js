@@ -18,10 +18,46 @@ const routes = [{
             import ("@/views/index"),
     },
     {
+        path: "/addclassfee",
+        name: "addclassfee",
+        component: () =>
+            import ("@/views/users/addclassfee"),
+    },
+    {
         path: "/class_fee",
         name: "class_fee",
         component: () =>
             import ("@/views/users/class_fee"),
+    },
+    {
+        path: "/jisuanqi",
+        name: "jisuanqi",
+        component: () =>
+            import ("@/views/users/jisuanqi"),
+    },
+    {
+        path: "/schoolthing",
+        name: "schoolthing",
+        component: () =>
+            import ("@/views/users/schoolthing"),
+    },
+    {
+        path: "/couse",
+        name: "couse",
+        component: () =>
+            import ("@/views/users/couse"),
+    },
+    {
+        path: "/userset",
+        name: "userset",
+        component: () =>
+            import ("@/views/users/userset"),
+    },
+    {
+        path: "/classList",
+        name: "classList",
+        component: () =>
+            import ("@/views/users/classList"),
     },
     {
         path: '/photo',

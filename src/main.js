@@ -39,14 +39,20 @@ import {
     aside,
     main,
     Image,
+    Option,
+    Pagination,
+    DatePicker,
 
 } from "element-ui";
 Vue.prototype.$api = api
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL = 'http://106.14.117.35:5001/api/v1';
+axios.defaults.baseURL = 'http://127.0.0.1:5000/api/v1';
 
+Vue.use(DatePicker);
+Vue.use(Option);
 Vue.use(BootstrapVue);
+Vue.use(Pagination);
 Vue.use(Button);
 Vue.use(Select);
 Vue.use(Menu);
